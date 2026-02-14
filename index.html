@@ -262,6 +262,56 @@
             display: block;
         }
 
+        /* Burger Menu */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .burger-line {
+            width: 28px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu.active .burger-line:nth-child(1) {
+            transform: rotate(45deg) translateY(12px);
+        }
+
+        .burger-menu.active .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active .burger-line:nth-child(3) {
+            transform: rotate(-45deg) translateY(-12px);
+        }
+
+        /* Mobile Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
         /* Hero Section */
         .hero {
             padding: 180px 0 100px;
@@ -486,7 +536,7 @@
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin-top: 30px;
         }
@@ -1033,27 +1083,62 @@
                 height: 24px;
             }
 
+            .burger-menu {
+                display: flex;
+            }
+
             .nav {
                 padding: 0 20px;
-                flex-direction: column;
-                gap: 12px;
+                position: relative;
+            }
+
+            .logo {
+                font-size: 20px;
             }
 
             .nav-links {
-                flex-wrap: wrap;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 280px;
+                background: var(--secondary);
+                flex-direction: column;
                 justify-content: center;
-                gap: 12px;
+                align-items: center;
+                gap: 30px;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+                padding: 20px;
+            }
+
+            [data-theme="light"] .nav-links {
+                background: var(--secondary);
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
             }
 
             .nav-links a {
-                font-size: 11px;
-                padding: 8px 12px;
-                border-radius: 6px;
-                background: rgba(0, 217, 255, 0.05);
+                font-size: 16px;
+                padding: 12px 24px;
+                border-radius: 8px;
+                background: rgba(0, 217, 255, 0.1);
+                width: 100%;
+                text-align: center;
+                display: block;
             }
 
             [data-theme="light"] .nav-links a {
-                background: rgba(0, 119, 204, 0.05);
+                background: rgba(0, 119, 204, 0.1);
+            }
+
+            .nav-links a:hover {
+                background: var(--accent);
+                color: var(--primary);
             }
 
             .hero {
@@ -1317,11 +1402,17 @@
     </button>
 
     <div class="bg-pattern"></div>
+    <div class="menu-overlay" id="menuOverlay"></div>
 
     <header>
         <nav class="nav">
             <div class="logo">MD</div>
-            <ul class="nav-links">
+            <div class="burger-menu" id="burgerMenu">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#experience">Expérience</a></li>
                 <li><a href="#skills">Compétences</a></li>
                 <li><a href="#education">Formation</a></li>
@@ -1358,10 +1449,6 @@
                                 <div class="stat">
                                     <span class="stat-number">3 ans</span>
                                     <span class="stat-label">D'expérience</span>
-                                </div>
-                                <div class="stat">
-                                    <span class="stat-number">1 an 8 mois</span>
-                                    <span class="stat-label">Chez Nexpublica</span>
                                 </div>
                                 <div class="stat">
                                     <span class="stat-number">4+</span>
@@ -1625,6 +1712,36 @@
             setTimeout(() => {
                 themeToggle.style.transform = '';
             }, 300);
+        });
+
+        // Burger Menu Functionality
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('navLinks');
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu when clicking on overlay
+        menuOverlay.addEventListener('click', () => {
+            burgerMenu.classList.remove('active');
+            navLinks.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
         });
 
         // Fixed Header on Scroll
