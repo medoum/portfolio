@@ -222,7 +222,7 @@
         /* Theme Toggle Button */
         .theme-toggle {
             position: fixed;
-            top: 30px;
+            top: 90px;
             right: 30px;
             width: 60px;
             height: 60px;
@@ -233,9 +233,16 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 1001;
             transition: all 0.3s ease;
             box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        @media (max-width: 968px) {
+            .theme-toggle {
+                top: 20px;
+                right: 20px;
+            }
         }
 
         .theme-toggle:hover {
@@ -271,6 +278,12 @@
             padding: 8px;
             z-index: 1001;
             transition: all 0.3s ease;
+        }
+
+        @media (min-width: 641px) {
+            .burger-menu {
+                display: none !important;
+            }
         }
 
         .burger-line {
@@ -1013,6 +1026,18 @@
         }
 
         @media (max-width: 768px) {
+            .theme-toggle {
+                top: 15px;
+                right: 15px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .theme-toggle svg {
+                width: 26px;
+                height: 26px;
+            }
+
             header {
                 padding: 15px 0;
             }
@@ -1072,19 +1097,21 @@
             }
 
             .theme-toggle {
-                top: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
+                top: 22px;
+                right: 80px;
+                width: 45px;
+                height: 45px;
             }
 
             .theme-toggle svg {
-                width: 24px;
-                height: 24px;
+                width: 22px;
+                height: 22px;
             }
 
             .burger-menu {
                 display: flex;
+                position: absolute;
+                right: 20px;
             }
 
             .nav {
