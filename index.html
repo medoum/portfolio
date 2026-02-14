@@ -8,13 +8,13 @@
     <style>
         :root {
             --primary: #000000;
-            --secondary: #0a0e1a;
+            --secondary: #000000;
             --accent: #00d9ff;
             --accent-glow: rgba(0, 217, 255, 0.3);
             --text: #e0e6ed;
             --text-muted: #8b95a8;
             --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --code-bg: #0d1117;
+            --code-bg: #000000;
         }
 
         [data-theme="light"] {
@@ -86,7 +86,7 @@
             right: 0;
             width: 100%;
             padding: 20px 0;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 999;
@@ -102,7 +102,7 @@
 
         header.scrolled {
             padding: 12px 0;
-            background: rgba(0, 0, 0, 0.98);
+            background: rgba(0, 0, 0, 1);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
         }
 
@@ -737,7 +737,6 @@
         /* Skills Section */
         .skills {
             padding: 100px 0;
-            background: rgba(0, 0, 0, 0.2);
         }
 
         .skills-grid {
@@ -851,7 +850,6 @@
         /* Contact Section */
         .contact {
             padding: 100px 0;
-            background: rgba(0, 0, 0, 0.2);
         }
 
         .contact-content {
@@ -987,7 +985,8 @@
         @media (max-width: 968px) {
             .hero-content {
                 grid-template-columns: 1fr;
-                gap: 60px;
+                gap: 40px;
+                padding: 0 10px;
             }
 
             .hero-text h1 {
@@ -1208,17 +1207,22 @@
             }
 
             .profile-card {
-                padding: 30px 20px;
+                padding: 30px 15px;
+                margin: 0 10px;
+            }
+
+            .hero-image {
+                padding: 0 10px;
             }
 
             .profile-img-container {
-                width: 180px;
-                height: 180px;
+                width: 160px;
+                height: 160px;
             }
 
             .stats {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                gap: 12px;
             }
 
             .stat {
@@ -1347,6 +1351,11 @@
         }
 
         @media (max-width: 480px) {
+            .hero-content {
+                padding: 0 5px;
+                gap: 30px;
+            }
+
             .hero-text h1 {
                 font-size: 32px;
                 white-space: normal !important;
@@ -1362,14 +1371,31 @@
                 font-size: 20px;
             }
 
+            .profile-card {
+                padding: 25px 10px;
+                margin: 0 5px;
+            }
+
             .profile-img-container {
-                width: 160px;
-                height: 160px;
+                width: 140px;
+                height: 140px;
             }
 
             .stats {
                 grid-template-columns: 1fr;
                 gap: 10px;
+            }
+
+            .stat {
+                padding: 12px;
+            }
+
+            .stat-number {
+                font-size: 22px;
+            }
+
+            .stat-label {
+                font-size: 10px;
             }
 
             .timeline-content {
@@ -1383,6 +1409,14 @@
         }
 
         @media (max-width: 360px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .hero-content {
+                padding: 0;
+            }
+
             .hero-text h1 {
                 font-size: 28px;
                 white-space: normal !important;
@@ -1405,6 +1439,24 @@
             .btn {
                 padding: 12px 24px;
                 font-size: 12px;
+            }
+
+            .profile-card {
+                padding: 20px 8px;
+                margin: 0;
+            }
+
+            .profile-img-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .stat {
+                padding: 10px;
+            }
+
+            .stat-number {
+                font-size: 20px;
             }
         }
     </style>
