@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohamed Doumbouya - Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         :root {
             --primary: #000000;
@@ -1785,7 +1786,7 @@
                     </p>
                 </div>
 
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/mpqjyjyk">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Nom complet</label>
@@ -2159,36 +2160,11 @@
         document.head.appendChild(style);
 
         // Contact form handling
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const formData = new FormData(this);
-                const name = formData.get('name');
-                const email = formData.get('email');
-                const subject = formData.get('subject');
-                const message = formData.get('message');
-                
-                // Créer le mailto link
-                const mailtoLink = `mailto:mohamedoum2430@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-                
-                // Ouvrir le client email
-                window.location.href = mailtoLink;
-                
-                // Optionnel: Afficher un message de confirmation
-                const submitBtn = this.querySelector('.btn-submit');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Message préparé !';
-                submitBtn.style.background = '#10b981';
-                
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.background = '';
-                    this.reset();
-                }, 3000);
-            });
-        }
+       // EmailJS init
+
+
+
+   
     </script>
 </body>
 </html>
